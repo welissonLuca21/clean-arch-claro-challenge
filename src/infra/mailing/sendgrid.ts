@@ -15,7 +15,7 @@ export class SendgridProvider {
   ) => {
     const template = {
       link: `${ENV.API_URL}/api/user/verify/${params.token}`,
-      subject: 'Confirme sua conta na yo!'
+      subject: 'Confirme sua conta'
     }
 
     const payload = {

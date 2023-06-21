@@ -3,9 +3,6 @@
   "version": "1.0.0",
   "license": "ISC",
   "main": "./dist/src/server.js",
-  "engines": {
-    "node": "18.x"
-  },
   "scripts": {
     "start": "node dist/src/server.js",
     "dev": "nodemon",
