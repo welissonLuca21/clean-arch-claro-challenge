@@ -1,0 +1,6 @@
+{
+  "tagPrefix": "",
+  "scripts": {
+    "postbump": "npm run version"
+  }
+}
