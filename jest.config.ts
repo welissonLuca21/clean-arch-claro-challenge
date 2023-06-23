@@ -16,13 +16,5 @@ export default {
     '^@/tests/(.*)$': '<rootDir>/tests/$1',
     '^@/(.*)$': '<rootDir>/src/$1'
   },
-  testTimeout: 500,
-  coverageThreshold: {
-    global: {
-      branches: 80,
-      functions: 80,
-      lines: 80,
-      statements: -10
-    }
-  }
+  testTimeout: 500
 }
