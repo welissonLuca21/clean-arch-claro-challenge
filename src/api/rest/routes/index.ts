@@ -9,7 +9,7 @@ router.get('/', (_, res) => {
   res.status(STATUS_CODE.OK).send('API Running!')
 })
 
-router.use('/auth', new AuthenticationRoutes().router)
-router.use('/user', new UserRoutes().router)
+router.use('/auth', new AuthenticationRoutes().getRouter)
+router.use('/user', new UserRoutes().getRouter)
 
 export default router

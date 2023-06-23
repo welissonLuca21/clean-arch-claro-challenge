@@ -7,14 +7,14 @@ import { asyncHandler } from '@/api/rest/middlewares/async-handlers'
 const authService = Container.get(Authenticate)
 
 export class AuthenticationRoutes {
-  private readonly _router = Router()
+  private readonly router = Router()
 
   constructor() {
-    this._router.post('/login', asyncHandler(this.login))
+    this.router.post('/login', asyncHandler(this.login))
   }
 
-  get router() {
-    return this._router
+  get getRouter() {
+    return this.router
   }
 
   login = async (req, res) => {
