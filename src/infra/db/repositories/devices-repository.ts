@@ -22,6 +22,22 @@ export class DevicesRepository {
       }
     })
   }
+
+  async findById(deviceId: string): Promise<Devices> {
+    return this.prisma.devices.findUnique({
+      where: {
+        id: deviceId
+      }
+    })
+  }
+
+  async delete(deviceId: string): Promise<Devices> {
+    return this.prisma.devices.delete({
+      where: {
+        id: deviceId
+      }
+    })
+  }
 }
 
 export interface CreateDeviceParams {
