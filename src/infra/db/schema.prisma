@@ -17,6 +17,7 @@ model User {
 
     isVerified Boolean @default(false)
     emailTokens EmailToken?
+    devices Devices?
 
     createdAt DateTime  @default(now())
     updatedAt DateTime? @updatedAt
@@ -34,4 +35,17 @@ model EmailToken {
     expiresAt DateTime?
     createdAt DateTime  @default(now())
     updatedAt DateTime? @updatedAt
+}
+
+
+model Devices {
+    id String @id @default(uuid())
+    name String 
+    deviceModel String
+    userId String @unique
+
+    createdAt DateTime  @default(now())
+    updatedAt DateTime? @updatedAt
+ 
+    user User @relation(fields: [userId], references: [id])
 }
