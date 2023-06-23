@@ -28,6 +28,7 @@ export const authorizeMiddleware: RequestHandler = (
     if (error instanceof TokenExpiredError) {
       throw new TokenHasExpired()
     } else if (error instanceof JsonWebTokenError) {
+      console.error(error.stack)
       throw new InvalidToken()
     } else {
       throw new Error('Error while verifying token')

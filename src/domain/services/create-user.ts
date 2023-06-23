@@ -64,10 +64,10 @@ export class CreateUser {
       type: EmailTokenType.ACCOUNT_CONFIRMATION
     })
 
-    await this.emailProvider.sendAccountConfirmationEmail({
+    /* await this.emailProvider.sendAccountConfirmationEmail({
       to: user.email,
       token: uniqueId
-    })
+    }) */
     return user
   }
 }
