@@ -1,6 +1,13 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { STATUS_CODE } from '@/constants/status-codes'
+import { NextFunction, Request, Response } from 'express'
 
-export const errorHandler = (err, req, res, next) => {
+export const errorHandler = (
+  err,
+  req: Request,
+  res: Response,
+  _next: NextFunction
+) => {
   console.error(`error: ${err.stack}`)
 
   const status = err.status

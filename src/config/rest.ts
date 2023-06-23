@@ -1,4 +1,5 @@
 import { errorHandler, requestLogger } from '@/api/rest/middlewares'
+import 'express-async-errors'
 import express, { Express } from 'express'
 import helmet from 'helmet'
 import cors from 'cors'
