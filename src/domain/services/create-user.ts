@@ -20,11 +20,11 @@ type Params = {
 @Service()
 export class CreateUser {
   constructor(
-    private readonly _userRepository: UserRepository,
-    private readonly _emailTokenRepository: EmailTokenRepository,
-    private readonly _hashProvider: HashProvider,
-    private readonly _emailProvider: SendgridProvider,
-    private readonly _uniqueIdProvider: UniqueIdProvider
+    private readonly userRepository: UserRepository,
+    private readonly emailTokenRepository: EmailTokenRepository,
+    private readonly hashProvider: HashProvider,
+    private readonly emailProvider: SendgridProvider,
+    private readonly uniqueIdProvider: UniqueIdProvider
   ) {}
 
   async create(params: Params) {
@@ -44,27 +44,27 @@ export class CreateUser {
       throw new InvalidAttribute('email', 'Email is invalid')
     }
 
-    const userExists = await this._userRepository.findByEmail(trimmedEmail)
+    const userExists = await this.userRepository.findByEmail(trimmedEmail)
     if (userExists) {
       throw new UserAlreadyExists()
     }
 
-    const hashedPassword = await this._hashProvider.createHash(password)
-    const user = await this._userRepository.create({
+    const hashedPassword = await this.hashProvider.createHash(password)
+    const user = await this.userRepository.create({
       firstName: params.firstName,
       lastName: params.lastName,
       email: trimmedEmail,
       password: hashedPassword
     })
 
-    const uniqueId = this._uniqueIdProvider.createUniqueId()
-    await this._emailTokenRepository.createToken({
+    const uniqueId = this.uniqueIdProvider.createUniqueId()
+    await this.emailTokenRepository.createToken({
       token: uniqueId,
       userId: user.id,
       type: EmailTokenType.ACCOUNT_CONFIRMATION
     })
 
-    await this._emailProvider.sendAccountConfirmationEmail({
+    await this.emailProvider.sendAccountConfirmationEmail({
       to: user.email,
       token: uniqueId
     })

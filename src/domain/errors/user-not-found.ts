@@ -1,14 +1,9 @@
-import { GraphQLError } from 'graphql'
-
-export class UserNotFoundError extends GraphQLError {
+export class UserNotFoundError extends Error {
   status: number
 
   constructor() {
-    super('User not found', {
-      extensions: {
-        code: 'USER_NOT_FOUND'
-      }
-    })
+    super('User not found')
+    this.name = 'UserNotFoundError'
     this.status = 404
   }
 }

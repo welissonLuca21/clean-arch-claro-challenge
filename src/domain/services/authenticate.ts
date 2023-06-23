@@ -15,9 +15,9 @@ type Params = {
 @Service()
 export class Authenticate {
   constructor(
-    private readonly _userRepository: UserRepository,
-    private readonly _hashProvider: HashProvider,
-    private readonly _jwtProvider: JwtProvider
+    private readonly userRepository: UserRepository,
+    private readonly hashProvider: HashProvider,
+    private readonly jwtProvider: JwtProvider
   ) {}
 
   async execute(params: Params) {
@@ -31,13 +31,13 @@ export class Authenticate {
       throw new InvalidAttribute('password', 'Password is required')
     }
 
-    const user = await this._userRepository.findByEmail(email)
+    const user = await this.userRepository.findByEmail(email)
 
     if (!user) {
       throw new UserNotFoundError()
     }
 
-    const isValidPassword = await this._hashProvider.compareHash(
+    const isValidPassword = await this.hashProvider.compareHash(
       password,
       user.password
     )
@@ -49,7 +49,7 @@ export class Authenticate {
       throw new UserNotVerifiedError()
     }
 
-    const token = this._jwtProvider.encryptToken(user.id, env.JWT_SECRET)
+    const token = this.jwtProvider.encryptToken(user.id, env.JWT_SECRET)
     return {
       userId: user.id,
       accessToken: token

@@ -1,15 +1,9 @@
-import { GraphQLError } from 'graphql'
-
-export class InvalidEmailToken extends GraphQLError {
+export class InvalidEmailToken extends Error {
   status: number
 
   constructor() {
-    super('This token was expired or invalid', {
-      extensions: {
-        code: 'INVALID_EMAIL_TOKEN'
-      }
-    })
-
+    super('This token was expired or invalid')
+    this.name = 'InvalidEmailToken'
     this.status = 400
   }
 }

@@ -1,14 +1,9 @@
-import { GraphQLError } from 'graphql'
-
-export class UserAlreadyExists extends GraphQLError {
+export class UserAlreadyExists extends Error {
   status: number
 
   constructor() {
-    super('User already exists', {
-      extensions: {
-        code: 'USER_ALREADY_EXISTS'
-      }
-    })
+    super('User already exists')
+    this.name = 'UserAlreadyExists'
     this.status = 400
   }
 }

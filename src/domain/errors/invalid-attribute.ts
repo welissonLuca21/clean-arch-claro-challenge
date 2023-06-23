@@ -1,6 +1,4 @@
-import { GraphQLError } from 'graphql'
-
-export class InvalidAttribute extends GraphQLError {
+export class InvalidAttribute extends Error {
   status: number
 
   constructor(attribute: string, description?: string) {
@@ -9,11 +7,8 @@ export class InvalidAttribute extends GraphQLError {
       message = message.concat(` - ${description}`)
     }
 
-    super(message, {
-      extensions: {
-        code: 'INVALID_ATTRIBUTE'
-      }
-    })
+    super(message)
+    this.name = 'InvalidAttribute'
     this.status = 400
   }
 }

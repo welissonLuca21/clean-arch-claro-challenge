@@ -32,6 +32,14 @@ export class UserRepository {
       }
     })
   }
+
+  findById = (userId: string) => {
+    return prisma.user.findUnique({
+      where: {
+        id: userId
+      }
+    })
+  }
 }
 
 export namespace UserRepository {

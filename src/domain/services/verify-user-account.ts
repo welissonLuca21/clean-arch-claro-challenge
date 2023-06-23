@@ -6,13 +6,13 @@ import { InvalidEmailToken } from '../errors/invalid-email-token'
 @Service()
 export class VerifyUserAccount {
   constructor(
-    private readonly _userRepository: UserRepository,
-    private readonly _emailTokenRepository: EmailTokenRepository
+    private readonly userRepository: UserRepository,
+    private readonly emailTokenRepository: EmailTokenRepository
   ) {}
 
   async execute(token: string) {
     const sanitizedToken = token?.trim()
-    const emailToken = await this._emailTokenRepository.findByToken(
+    const emailToken = await this.emailTokenRepository.findByToken(
       sanitizedToken
     )
 
@@ -20,8 +20,8 @@ export class VerifyUserAccount {
       throw new InvalidEmailToken()
     }
 
-    const user = await this._userRepository.setVerifiedUser(emailToken.userId)
-    await this._emailTokenRepository.deleteToken(sanitizedToken)
+    const user = await this.userRepository.setVerifiedUser(emailToken.userId)
+    await this.emailTokenRepository.deleteToken(sanitizedToken)
     return user.isVerified
   }
 }
